@@ -7,21 +7,34 @@ from constants import *
 
 def main():
     pygame.init()
+
+    #sets the size of the screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    #setting up the fps/delta time
+    clock = pygame.time.Clock()
+    dt = 0
 
     print("Starting asteroids!")
     print(f"Screen width:", (SCREEN_WIDTH))
     print(f"Screen height:", (SCREEN_HEIGHT))
 
     while True:
+        #draws the screen and updates
         pygame.Surface.fill(screen, (0, 0, 0))
         pygame.display.flip()
 
+        #This checks to see if the close button has been pressed
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print(dt)
                 return
+
+        clock.tick(60)
+        dt = clock.tick(60)/1000
 
 
 
 if __name__ == "__main__":
+
+
     main()
