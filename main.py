@@ -24,6 +24,7 @@ def main():
         #draws the screen and updates
         pygame.Surface.fill(screen, (0, 0, 0))
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()
 
         #This checks to see if the close button has been pressed
