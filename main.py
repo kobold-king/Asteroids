@@ -5,6 +5,7 @@ import pygame
 from constants import *
 from player import Player
 
+
 def main():
     pygame.init()
 
@@ -13,6 +14,12 @@ def main():
     #setting up the fps/delta time
     clock = pygame.time.Clock()
     dt = 0
+
+    #adding groups to lessen cltter
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     #define Player
     player =  Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
@@ -23,8 +30,11 @@ def main():
     while True:
         #draws the screen and updates
         pygame.Surface.fill(screen, (0, 0, 0))
-        player.draw(screen)
-        player.update(dt)
+        updatable.update(dt)
+
+        for item in drawable:
+            item.draw(screen)
+
         pygame.display.flip()
 
         #This checks to see if the close button has been pressed
