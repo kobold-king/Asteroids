@@ -3,6 +3,7 @@
 # throughout this file
 import pygame
 import sys
+import os
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -11,13 +12,14 @@ from shot import Shot
 
 def main():
     pygame.init()
-
+    pygame.font.init()
     #sets the size of the screen
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     #setting up the fps/delta time
     clock = pygame.time.Clock()
     dt = 0
     player_score = 0
+    font = pygame.font.Font(None, 36)
 
     #adding groups to lessen cltter
     updatable = pygame.sprite.Group()
@@ -56,6 +58,10 @@ def main():
 
         for item in drawable:
             item.draw(screen)
+
+        # Draw the score to the screen
+        score_text = font.render(f'Score: {player_score}', True, (255, 255, 255))
+        screen.blit(score_text, (10, 10))
 
         pygame.display.flip()
 
