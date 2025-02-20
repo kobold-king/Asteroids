@@ -17,6 +17,7 @@ def main():
     #setting up the fps/delta time
     clock = pygame.time.Clock()
     dt = 0
+    player_score = 0
 
     #adding groups to lessen cltter
     updatable = pygame.sprite.Group()
@@ -44,7 +45,14 @@ def main():
 
         for object in asteroids:
             if object.collisionCheck(player):
+                print(player_score)
                 sys.exit("Game Over!")
+            for shot in shots:
+                if shot.collisionCheck(object):
+                    player_score += 1
+                    object.split()
+                    shot.kill()
+
 
         for item in drawable:
             item.draw(screen)
@@ -54,7 +62,7 @@ def main():
         #This checks to see if the close button has been pressed
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print(dt)
+                (print(player_score))
                 return
 
         clock.tick(60)
